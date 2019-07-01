@@ -74,12 +74,12 @@ public class WebController {
         model.addAttribute("buttonVal", "Add");
         if (car == null){
             model.addAttribute("carform", carForm);
-            model.addAttribute("Message", "1");
+            model.addAttribute("messages", "There was an error adding the values to the database.");
             return "addPage";
         }
         else{
             model.addAttribute("carform",new CarForm());
-            model.addAttribute("Message", "2");
+            model.addAttribute("messages", "Successfully added.");
             return "addPage";
         }
     }
@@ -89,7 +89,6 @@ public class WebController {
         ArrayList<Car> carList = new ArrayList<>();
         carList = carService.showAll();
         model.addAttribute("cars", carList);
-        model.addAttribute("Message", "3");
         return "listPage";
     }
     @GetMapping(value = "/edit/{id}")
@@ -101,7 +100,7 @@ public class WebController {
             model.addAttribute("carform", carForm);
         }
         else{
-            model.addAttribute("Message","3");
+            model.addAttribute("messages","There was an error updating values");
         }
 
         model.addAttribute("buttonVal", "Update");
@@ -110,7 +109,7 @@ public class WebController {
     @PostMapping(value = "/edit/{id}")
     public String editPost(Model model, CarForm carForm, @PathVariable int id){
         model.addAttribute("Action","/edit/" + id);
-        model.addAttribute("Message","4");
+        model.addAttribute("messages","Successfully updated.");
         model.addAttribute("buttonVal", "Update");
         model.addAttribute("carform", carForm);
         carService.saveCar(carForm);
@@ -122,14 +121,14 @@ public class WebController {
         Optional<Car> carVar = carService.locateCar(id);
         if (carVar.isPresent()){
             carService.deleteCar(id);
-            model.addAttribute("Message","2");
+            model.addAttribute("messages","Car deleted.");
             ArrayList<Car> carList = new ArrayList<>();
             carList = carService.showAll();
             model.addAttribute("cars", carList);
             return "listPage";
         }
         else {
-            model.addAttribute("Message","1");
+            model.addAttribute("messages","There was an error deleting the value from the database.");
             return "listPage";
         }
     }

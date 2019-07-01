@@ -7,8 +7,10 @@
 </head>
 <body>
 <header th:insert = "navigation.html::HEADER"></header>
+
 <form action="#" th:action="${Action}" th:object="${carform}" method="post">
     <nav th:insert = "navigation.html::NAV"></nav>
+    <div class="messages" th:if="${messages}"><h3 th:text="${messages}"></h3></div>
     <table style="width:100%">
         <tr>
             <th>Make</th>
@@ -26,10 +28,6 @@
             <th></th>
             <td><input type="submit" th:value= "${buttonVal}" /><input type="reset" value="Reset" /></td>
         </tr>
-        <span th:if="${Message == '1'}">There was an error adding the values to the database.</span>
-        <span th:if="${Message == '2'}">Successfully added.</span>
-        <span th:if="${Message == '3'}">There was an error updating values.</span>
-        <span th:if="${Message == '4'}">Successfully updated.</span>
 
     </table>
 

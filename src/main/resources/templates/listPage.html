@@ -8,6 +8,7 @@
 <body>
 <header th:insert = "navigation.html::HEADER"></header>
 <nav th:insert = "navigation.html::NAV"></nav>
+    <div class="messages" th:if="${messages}"><h3 th:text="${messages}"></h3></div>
     <table style="width:100%">
         <tr>
             <th>ID</th>
@@ -25,7 +26,5 @@
             <td><a th:href="@{/remove/{id}(id=${car.id})}">Remove</a></td>
         </tr>
     </table>
-    <span th:if="${Message == '1'}">There was an error deleting the value from the database.</span>
-    <span th:if="${Message == '2'}">Car deleted.</span>
 </body>
 </html>
