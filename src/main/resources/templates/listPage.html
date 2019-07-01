@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <style th:include = "navigation.html::STYLE">
+    </style>
+</head>
+<body>
+<header th:insert = "navigation.html::HEADER"></header>
+<nav th:insert = "navigation.html::NAV"></nav>
+    <table style="width:100%">
+        <tr>
+            <th>ID</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Year</th>
+
+        </tr>
+        <tr th:each="car : ${cars}">
+            <td th:text="${car.id}"></td>
+            <td th:text="${car.make}"></td>
+            <td th:text="${car.model}"></td>
+            <td th:text="${car.year}"></td>
+            <td><a th:href="@{/edit/{id}(id=${car.id})}">Edit</a></td>
+            <td><a th:href="@{/remove/{id}(id=${car.id})}">Remove</a></td>
+        </tr>
+    </table>
+    <span th:if="${Message == '1'}">There was an error deleting the value from the database.</span>
+    <span th:if="${Message == '2'}">Car deleted.</span>
+</body>
+</html>
